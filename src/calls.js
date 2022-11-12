@@ -13,7 +13,12 @@ async function getLocation(location) {
 		getMood(description);
 	}
 	catch (error) {
-		console.log(error);
+		if (TypeError) {
+			const headline = document.getElementById("city");
+			const city = search.value;
+			clear();
+			headline.innerText = "Oops, there doesn't seem to be a city on this planet called " + city + ". Please try a different one.";
+		}
 	}
 }
 

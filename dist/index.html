@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
 	<title>Weather App</title>
 	<script src="main.js" defer></script>
 </head>
+
 <body>
 	<div class="container" id="container" src="#">
 		<div class="main">
@@ -16,7 +18,16 @@
 				<button type="submit" id="lupe"></button>
 			</form>
 			<div id="display"></div>
+			<div id="toggle">
+				<p>Cº</p>
+				<label class="switch">
+					<input type="checkbox" id="temperature">
+					<span class="slider round" id="slider"></span>
+				</label>
+				<p>Fº</p>
+			</div>
 		</div>
 	</div>
 </body>
+
 </html>

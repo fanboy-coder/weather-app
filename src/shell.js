@@ -7,8 +7,8 @@ function display(name, icon, description, temp, humidity, speed) {
 	weatherbox.setAttribute("id", "weatherbox");
 
 	//updates the headline with the city's name
-	const test = document.getElementById("city");
-	test.innerText = "Here's the weather in " + name;
+	const city = document.getElementById("city");
+	city.innerText = "Here's the weather in " + name;
 
 	//creates a div with the weather data
 	const databox = weatherbox.appendChild(document.createElement("div"));
@@ -39,8 +39,15 @@ function display(name, icon, description, temp, humidity, speed) {
 	const temperatureimg = box5.appendChild(document.createElement("img"));
 	temperatureimg.src = "../src/images/thermometer.svg";
 	const box6 = weathertemperature.appendChild(document.createElement("div"));
-	const temperaturep2 = box6.appendChild(document.createElement("p"));
-	temperaturep2.innerText = Math.round(temp - 273,15)*10/10 + "ºC";
+	box6.setAttribute("id","temp-display");
+	const box6a = box6.appendChild(document.createElement("div"));
+	const temperaturep1 = box6a.appendChild(document.createElement("p"));
+	temperaturep1.setAttribute("id","temp-value");
+	temperaturep1.innerText = Math.round(temp - 273,15)*10/10;
+	const box6b = box6.appendChild(document.createElement("div"));
+	const temperaturep2 = box6b.appendChild(document.createElement("p"));
+	temperaturep2.setAttribute("id","degrees");
+	temperaturep2.innerText = "ºC";
 
 	//creates a column to display the humidity
 	const weatherhumidity = databox.appendChild(document.createElement("div"));
@@ -70,7 +77,7 @@ function display(name, icon, description, temp, humidity, speed) {
 	const windp4 = box12.appendChild(document.createElement("p"));
 	windp4.innerText = speed + "m/s";
 
-	//creates a columnt to display the mood
+	//creates a column to display the mood
 	const weathermood = databox.appendChild(document.createElement("div"));
 	weathermood.setAttribute("id","mood");
 	weathermood.setAttribute("class","box");
@@ -80,14 +87,35 @@ function display(name, icon, description, temp, humidity, speed) {
 	const box14 = weathermood.appendChild(document.createElement("img"));
 	box14.setAttribute("id","wind-img");
 	const box15 = weathermood.appendChild(document.createElement("div"));
+
+	const toggle = document.getElementById("toggle");
+	toggle.style.visibility = "visible";
 }
 
 //clears the weather display box
 function clear () {
 	const weatherbox = document.getElementById("weatherbox");
+	const toggle = document.getElementById("toggle");
+			
 	if (weatherbox) {
 		weatherbox.remove();
+		toggle.style.visibility = "hidden";
 	}
 }
 
-export { display, clear };
+// toggles between celsius and farenheit
+function toggle () {
+	let temperature = document.getElementById("temp-value");
+	let metric = document.getElementById("degrees");
+
+	if(metric.innerText === "ºC") {
+		metric.innerText = "ºF";
+		temperature.innerText = Math.round(temperature.innerText *1.8 +32);
+	}
+	else {
+		metric.innerText = "ºC";
+		temperature.innerText = Math.round((temperature.innerText - 32) /1.8);
+	}
+};
+
+export { display, clear, toggle };
